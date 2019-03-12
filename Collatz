@@ -1,0 +1,21 @@
+int main() {
+int p;
+int n;
+int p=fork();
+if (p == 0) {
+while(n!=1) {
+if (n%2==0) {
+n = n/2;
+}
+else if (n%2 == 1) {
+n = (3*n) + 1;
+}
+printf("%d", p);
+		}
+	}
+else if(p > 0) {
+printf("Parent executes and will wait for child to process. Child process data is: ");
+wait();
+}
+return 0;
+}
