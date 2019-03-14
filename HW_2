@@ -18,7 +18,7 @@ public boolean PrimeOrNot (int number) {
 
 public void smallnumbers() {
 	
-	for(int i=1; i<= number; i++) {
+	for(int i=2; i<= number; i++) {
 		if(PrimeOrNot(i)) {
 		System.out.println(i);}
 		else {}
