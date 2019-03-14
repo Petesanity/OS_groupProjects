@@ -1,0 +1,128 @@
+public class Final implements Runnable{
+	// use the static value to change the value anywhere the user wants
+	private static int [] n;
+	static int sum=0;
+	//create the 3 tread
+	 static Thread one=new Thread();
+	 static Thread two= new Thread();
+	 static Thread three= new Thread();
+	
+	public Final (int [] a) {
+		n=a;
+		}
+// store a static average value
+	public static double average() {
+	
+       for (int i=0; i<n.length; i++) {
+			sum=sum+n[i];
+			}
+		
+		double ave = sum / n.length;
+		System.out.print("\n the average value is " + ave);
+	
+		return ave;
+	
+	}
+
+     
+		
+			
+	
+// store a static minimum value
+		public static int min() {
+	    	
+	    	int minvalue= n[0];
+	    	for(int i=0; i<n.length; i++) {
+	    		if(n[i]<minvalue) {
+	    			minvalue= n[i];
+	    		}
+	    		
+	    		
+	    	}
+	    
+	    	System.out.println("\n\n The minimum value is "+ minvalue);
+	    
+	    	return minvalue;
+	    	
+	    }
+
+// store a static maximum value
+	 
+	     public static int max() {
+	    	
+	    	int maxvalue= n[0];
+	    	for(int i=0; i<n.length; i++) {
+	    		if(n[i]>maxvalue) {
+	    			maxvalue= n[i];
+	    		}
+	    		
+	    		
+	    	}
+	    	
+	    	System.out.println("\nThe maximum value is "+ maxvalue);
+	   
+	    	return maxvalue;
+	    	
+	    }
+//use the run method to run and get the values
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			try {
+				average();
+				one.start();
+				min();
+				two.start();
+				max();
+				three.start();
+			}
+			catch (Exception ex) {
+		    	System.out.println("Worker thread: " + Thread.currentThread().getName() + " interrupted.");
+		    	}
+		    	System.out.println("Worker thread: " + Thread.currentThread().getName() + " exiting.");
+		    }
+			
+		}
+	
+
+import java.util.Scanner;
+
+public class Test {
+
+	public static void main(String[] args) {
+
+	
+	   System.out.println("enter how many numbers ");
+	   // takes value from the terminal
+		Scanner scan= new Scanner(System.in);
+		// takes value from the terminal
+		Scanner scan1= new Scanner(System.in);
+		
+		int x= scan.nextInt();
+		System.out.println("enter the numbers ");
+		// user enters the size of the array
+		int[] numbers= new int[x];
+            Final f= new Final(numbers);
+		 Thread a= new Thread();
+		a.start();
+		
+		for(int i=0; i<numbers.length; i++) {
+			// this one take numbers of the array from the terminal
+			numbers[i]= scan1.nextInt();
+		}
+		
+		f.run();
+	
+	}	
+
+	}
+
+
+
+ 
+	
+	
+
+
+
+
