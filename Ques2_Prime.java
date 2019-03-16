@@ -2,7 +2,7 @@
 	NAMES: Peter Farquharson
 		   Davian Farquharson
 		   Jose Cantres
-		   Mahbuba Mim
+		   Mahboba Mim
 */
 
 
