@@ -1,0 +1,140 @@
+/*
+	NAMES: Peter Farquharson
+		   Davian Farquharson
+		   Jose Cantres
+		   Mahboba Mim
+*/
+import java.util.Scanner;
+																																																																																																																																	
+public class StatisticalValue implements Runnable {
+private static int amountOfNumbers,index, input, average, sum, max;      //Global variables
+private static int min = Integer.MAX_VALUE;
+//private static int max = Integer.MIN_VALUE;
+static Scanner in = new Scanner(System.in);
+private static int nums[] = new int[100];							//Array of ints
+public static void main(String[] args) {
+
+Thread t1 = new Thread(new Runnable() {
+    @Override
+    public void run() {
+    	try {
+    	System.out.println("Current Thread: " + Thread.currentThread().getName()); //Get current threads name and print
+    	System.out.println("Enter any number less than 0 to stop entering values. "
+    			+ "Enter positive values that you want to find the minimum, maximum and average of: ");
+    	while (input >= 0 ){                       //While input of user is less greater than or equal to 0
+    		input = in.nextInt();				   //Allow user to keep inputting
+    		if (input < 0) {					   //If user inputs a number less than 0 then break
+    			break;
+    		}
+    		nums[index] = input;					//Assign the user input into the index number in the array
+    		if (nums[index] > max) {				//If the number in that spot in the array is greater than the currentmax
+        		max = nums[index];					// Assign the number in that spot in the array as the max
+        	}
+    		index++;								//Increment index by 1
+    		amountOfNumbers++;						//Increment amount of number user input by 1
+    		}
+    		System.out.println("Computing/Finding Maximum Value...");
+    		Thread.sleep(2500);						//Pause for 2.5 seconds.
+    	} 
+    	catch (Exception ex) {
+        	System.out.println("Worker thread: " + Thread.currentThread().getName() + " interrupted.");
+    	}
+    		System.out.println("Worker thread: " + Thread.currentThread().getName() + " exiting.");  //Get Thread name and print that it is exiting.
+	}
+});  
+t1.start();         //Begin first thread execution
+	try {
+	System.out.println("Current Thread: " + Thread.currentThread().getName());
+t1.join();			//Wait until thread is done executing before moving on to next instructions
+} 
+	catch (Exception ex) {
+    	System.out.println("Worker thread: " + Thread.currentThread().getName() + " interrupted.");
+}
+
+Thread t2 = new Thread(new Runnable() {
+    @Override
+public void run() {
+    try {
+    	System.out.println("Current Thread: " + Thread.currentThread().getName());
+    while (input >= 0 ){
+    	input = in.nextInt();
+    if (input < 0) {
+    	break;
+    } 
+    nums[index] = input;
+    index++;
+    if (nums[index] < min) {
+    		min = nums[index];
+    	}
+    	index++;
+    }
+    	Thread.sleep(2500);
+    	System.out.println("Computing/Finding Minimum Value...");
+} 
+    catch (Exception ex) {
+    	System.out.println("Worker thread: " + Thread.currentThread().getName() + " interrupted.");
+    	}
+    	System.out.println("Worker thread: " + Thread.currentThread().getName() + " exiting.");
+    }
+});  
+t2.start();									//Begin second thread execution
+	try {
+		System.out.println("Current Thread: " + Thread.currentThread().getName());
+	t2.join();								//Wait until thread is done executing before moving on to next instructions
+	} 
+	catch (Exception ex) {
+    	System.out.println("Worker thread: " + Thread.currentThread().getName() + " interrupted.");
+	}
+
+Thread t3 = new Thread(new Runnable() {
+    @Override
+public void run() {
+    try {
+    	System.out.println("Current Thread: " + Thread.currentThread().getName());
+    for (int i = 0; i < nums.length; i++) {     //Loop until the arrays length
+    	sum += nums[i];							//Add the number in that index to sum
+    }
+    	average = sum / amountOfNumbers;		//Divide the sum by the amount of numbers user input.
+    	Thread.sleep(2500);
+    	System.out.println("Computing Average Value...");
+    	} 	
+    catch (Exception ex) {
+    	System.out.println("Worker thread: " + Thread.currentThread().getName() + " interrupted.");
+    	}
+    	System.out.println("Worker thread: " + Thread.currentThread().getName() + " exiting.");
+    	}
+	}
+);  
+
+t3.start();							//Begin third thread execution
+
+	try {
+	System.out.println("Current Thread: " + Thread.currentThread().getName());
+	
+t3.join();							//Wait until thread is done executing before moving on to next instructions
+	
+} 
+	catch (Exception ex) {
+    System.out.println("Worker thread: " + Thread.currentThread().getName() + " interrupted.");
+
+}
+
+System.out.println("Current Thread: " + Thread.currentThread().getName());
+System.out.println("Max is: " + max);
+System.out.println("Min is: " + min);
+System.out.println("Average is: " + average);
+
+	try {
+    Thread.sleep(3000);
+	} 
+	catch (Exception ex) {
+     System.out.println("Main thread Interrupted");
+	}
+     System.out.println("Main thread exiting.");
+ }
+
+@Override
+public void run() {
+	// TODO Auto-generated method stub
+	}
+}
